@@ -6,6 +6,7 @@ package com.qingguatang.Java5minute.course3.model;
  */
 public class SongInfo {
 
+  private String id;
   //歌曲名称
   private String name;
   //歌手名称
@@ -18,6 +19,14 @@ public class SongInfo {
   private String lyrics;
   //专辑图片
   private String albumImg;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
 
   public String getName() {
     return name;
