@@ -1,9 +1,13 @@
 package com.qingguatang.Java5minute.course3;
 
 import com.qingguatang.Java5minute.course3.model.SongInfo;
+import com.qingguatang.Java5minute.course4.model.Comment;
+import com.qingguatang.Java5minute.course5.CommentPostControl;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class SongInfoControl {
+  @Autowired
+  private CommentPostControl commentPostControl;
 
   private static Map<String, SongInfo> songInfoMap = new HashMap<>();
 
@@ -25,6 +31,8 @@ public class SongInfoControl {
     }
     SongInfo songInfo = songInfoMap.get(songId);
     modelMap.addAttribute("song", songInfo);
+    List<Comment> comments = commentPostControl.getComments(songId);
+    modelMap.addAttribute("comments",comments);
     return "index";
   }
 
@@ -56,12 +64,12 @@ public class SongInfoControl {
     songInfo.setName("Someone Like You");
     songInfo.setSinger("Adele");
     songInfo.setAlbumName("Someone Like You");
-    songInfo.setCommentCount(10);
+    songInfo.setCommentCount(789);
     songInfo.setAlbumImg(
         "http://p1.music.126.net/-g2ieFBmoy7T8crwFaAdxQ==/109951163077007716.jpg?param=130y130");
     songInfo.setLyrics("I heard<br>"
         + "听说<br>"
-        + "That you are settled down"
+        + "That you are settled down<br>"
         + "你已定下来");
     songInfoMap.put("16435049", songInfo);
   }
